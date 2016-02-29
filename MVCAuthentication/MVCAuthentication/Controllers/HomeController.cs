@@ -4,13 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ProductManager.Controllers
+namespace MVCAuthentication.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            //ViewBag.imgName = Server.MapPath("images/download.jpg");
             return View();
         }
 
@@ -20,7 +19,7 @@ namespace ProductManager.Controllers
 
             return View();
         }
-
+        [Authorize (Roles ="admin")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
