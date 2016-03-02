@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using MVCAuthentication.Models;
+using System.Net.Mail;
 
 namespace MVCAuthentication
 {
@@ -19,6 +20,10 @@ namespace MVCAuthentication
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
+            SmtpClient client = new SmtpClient();
+            var newMessage = new MailMessage { Body = message.Body, Subject = message.Subject };
+            newMessage.To.Add(message.Destination);
+            client.Send(newMessage);
             return Task.FromResult(0);
         }
     }
